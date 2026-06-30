@@ -1,0 +1,82 @@
+﻿@model DesignPatternsDay.Entities.Order
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Sipariş Detayı";
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<div class="row g-4">
+    <!-- Sol: Müşteri Bilgileri -->
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="mb-3" style="color:#7fad39">Müşteri Bilgileri</h6>
+                <table class="table table-sm">
+                    <tr><td style="color:#aaa">Ad Soyad</td><td><strong>@Model.CustomerName</strong></td></tr>
+                    <tr><td style="color:#aaa">E-posta</td><td><strong>@Model.CustomerEmail</strong></td></tr>
+                    <tr><td style="color:#aaa">Telefon</td><td><strong>@Model.CustomerPhone</strong></td></tr>
+                    <tr><td style="color:#aaa">Adres</td><td><strong>@Model.Address</strong></td></tr>
+                    <tr><td style="color:#aaa">Tarih</td><td><strong>@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</strong></td></tr>
+                    <tr><td style="color:#aaa">Toplam</td><td><strong style="color:#7fad39">@Model.TotalPrice.ToString("F2") ₺</strong></td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Durum Güncelle -->
+        <div class="card mt-3">
+            <div class="card-body">
+                <h6 class="mb-3" style="color:#7fad39">Durum Güncelle</h6>
+                <form method="post" action="/Admin/Order/UpdateStatus/@Model.Id">
+                    <select name="status" class="form-select form-select-sm mb-3">
+                        <option value="Beklemede" @@(Model.Status == "Beklemede" ? "selected" : "")>Beklemede</option>
+                        <option value="Hazırlanıyor" @@(Model.Status == "Hazırlanıyor" ? "selected" : "")>Hazırlanıyor</option>
+                        <option value="Kargoda" @@(Model.Status == "Kargoda" ? "selected" : "")>Kargoda</option>
+                        <option value="Teslim Edildi" @@(Model.Status == "Teslim Edildi" ? "selected" : "")>Teslim Edildi</option>
+                        <option value="İptal Edildi" @@(Model.Status == "İptal Edildi" ? "selected" : "")>İptal Edildi</option>
+                    </select>
+                    <button type="submit" class="btn-green w-100"><i class="fas fa-save"></i> Güncelle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sağ: Sipariş Ürünleri -->
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="mb-3" style="color:#7fad39">Sipariş Ürünleri</h6>
+                <table class="table table-sm">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Ürün</th>
+                            <th>Birim Fiyat</th>
+                            <th>Adet</th>
+                            <th>Toplam</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.OrderItems)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.Price.ToString("F2") ₺</td>
+                                <td>@item.Quantity</td>
+                                <td>@((item.Price * item.Quantity).ToString("F2")) ₺</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a href="/Admin/Order" class="btn btn-sm btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i> Siparişlere Dön
+    </a>
+</div>

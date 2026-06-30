@@ -1,0 +1,116 @@
+﻿@model List<DesignPatternsDay.Entities.Product>
+
+<section class="compare_section sec_ptb_140 clearfix"
+         style="background-image: url(/organic-html/assets/images/compare/compare-bg.jpg);"
+         data-aos="fade-up" data-aos-duration="2000">
+    <div class="container">
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">@TempData["Success"]</div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-warning">@TempData["Error"]</div>
+        }
+
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="compare_content_wrap">
+                <div class="d-flex justify-content-end mb-3">
+                    <a href="/Compare/Clear" class="btn btn-outline-danger rounded-pill btn-sm">
+                        <i class="fas fa-trash"></i> Listeyi Temizle
+                    </a>
+                </div>
+                <table class="table text-center bg-white rounded">
+                    <thead>
+                        <tr>
+                            <th style="width:150px"></th>
+                            @foreach (var product in Model)
+                            {
+                                <th>
+                                    <a href="/Compare/Remove/@product.Id" class="btn btn-sm btn-outline-danger mb-2">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                    <div class="product_image mb-2">
+                                        <img src="@(string.IsNullOrEmpty(product.ImageUrl) ? "/organic-html/assets/images/compare/compare-1.jpg" : product.ImageUrl)"
+                                             style="width:100px;height:100px;object-fit:cover;border-radius:8px;" alt="@product.Name" />
+                                    </div>
+                                    <h6>@product.Name</h6>
+                                    <span style="color:#7fad39;font-weight:600">@product.Price ₺</span>
+                                </th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-start fw-bold">Kategori</td>
+                            @foreach (var product in Model)
+                            {
+                                <td>@product.Category</td>
+                            }
+                        </tr>
+                        <tr>
+                            <td class="text-start fw-bold">Stok</td>
+                            @foreach (var product in Model)
+                            {
+                                <td>
+                                    @if (product.Stock == 0)
+                                    {
+                                        <span style="color:red">Tükendi</span>
+                                    }
+                                    else if (product.Stock <= 5)
+                                    {
+                                        <span style="color:orange">Son @product.Stock adet</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="color:green">@product.Stock adet</span>
+                                    }
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            <td class="text-start fw-bold">Organik</td>
+                            @foreach (var product in Model)
+                            {
+                                <td>@(product.IsOrganic ? "✅ Evet" : "❌ Hayır")</td>
+                            }
+                        </tr>
+                        <tr>
+                            <td class="text-start fw-bold">Fiyat</td>
+                            @foreach (var product in Model)
+                            {
+                                <td style="color:#7fad39;font-weight:600">@product.Price ₺</td>
+                            }
+                        </tr>
+                        <tr>
+                            <td></td>
+                            @foreach (var product in Model)
+                            {
+                                <td>
+                                    <form method="post" action="/Cart/AddToCart">
+                                        <input type="hidden" name="productId" value="@product.Id" />
+                                        <input type="hidden" name="quantity" value="1" />
+                                        <button type="submit" class="btn btn-success btn-sm rounded-pill">
+                                            <i class="fas fa-shopping-bag"></i> Sepete Ekle
+                                        </button>
+                                    </form>
+                                </td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <i class="fas fa-exchange-alt fa-3x" style="color:#ccc"></i>
+                <h4 class="mt-3" style="color:#aaa">Karşılaştırma listeniz boş</h4>
+                <a href="/Shop" class="btn btn-success rounded-pill mt-3">Ürünlere Git</a>
+            </div>
+        }
+
+    </div>
+</section>

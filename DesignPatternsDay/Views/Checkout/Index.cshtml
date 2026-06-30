@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödeme - Organik Market</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="/organic-html/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/organic-html/assets/css/style.css">
+</head>
+<body>
+    <div class="body-wrap overflow-hidden">
+        @await Html.PartialAsync("~/Views/Shared/Shop/_ShopHeaderComponentPartial.cshtml")
+
+        <main>
+            <section class="sec_space_large">
+                <div class="container">
+                    <div class="row g-5">
+                        <!-- Sol: Form -->
+                        <div class="col-lg-7">
+                            <h4 class="mb-4">Teslimat Bilgileri</h4>
+                            <form method="post" action="/Checkout/PlaceOrder">
+                                <div class="mb-3">
+                                    <label class="form-label">Ad Soyad</label>
+                                    <input type="text" name="customerName" class="form-control" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">E-posta</label>
+                                    <input type="email" name="customerEmail" class="form-control" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Telefon</label>
+                                    <input type="text" name="customerPhone" class="form-control" required />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Adres</label>
+                                    <textarea name="address" class="form-control" rows="3" required></textarea>
+                                </div>
+                                <button type="submit" class="btn custom_btn rounded-pill px-5 py-3 text-white w-100">
+                                    Siparişi Ver <i class="fas fa-long-arrow-alt-right"></i>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Sağ: Sipariş Özeti -->
+                        <div class="col-lg-5">
+                            <h4 class="mb-4">Sipariş Özeti</h4>
+                            <div class="card">
+                                <div class="card-body">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Ürün</th>
+                                                <th>Adet</th>
+                                                <th>Fiyat</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.Cart)
+                                            {
+                                                <tr>
+                                                    <td>@item.ProductName</td>
+                                                    <td>@item.Quantity</td>
+                                                    <td>@((item.Price * item.Quantity).ToString("F2")) ₺</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <hr />
+                                    <div class="d-flex justify-content-between fw-bold">
+                                        <span>Toplam</span>
+                                        <span style="color:#7fad39">@ViewBag.Total.ToString("F2") ₺</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        @await Html.PartialAsync("~/Views/Shared/Shop/_ShopFooterComponentPartial.cshtml")
+        @await Html.PartialAsync("~/Views/Shared/Shop/_ShopScriptComponentPartial.cshtml")
+    </div>
+</body>
+</html>

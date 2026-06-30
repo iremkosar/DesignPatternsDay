@@ -1,0 +1,28 @@
+﻿@model DesignPatternsDay.Entities.Product
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Ürün Sil";
+}
+
+<div class="card" style="max-width:500px">
+    <div class="card-body p-4">
+        <div class="mb-3" style="color:#e24b4a">
+            <i class="fas fa-exclamation-triangle fa-2x"></i>
+        </div>
+        <h6 class="mb-3">Bu ürünü silmek istediğinize emin misiniz?</h6>
+        <table class="table table-sm mb-4">
+            <tr><td style="color:#8899aa;font-size:13px">Ürün Adı</td><td style="font-size:13px;font-weight:500">@Model.Name</td></tr>
+            <tr><td style="color:#8899aa;font-size:13px">Kategori</td><td style="font-size:13px">@Model.Category</td></tr>
+            <tr><td style="color:#8899aa;font-size:13px">Fiyat</td><td style="font-size:13px">@Model.Price ₺</td></tr>
+            <tr><td style="color:#8899aa;font-size:13px">Stok</td><td style="font-size:13px">@Model.Stock</td></tr>
+        </table>
+        <form method="post" action="/Admin/Product/Delete/@Model.Id">
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-sm btn-danger">
+                    <i class="fas fa-trash"></i> Evet, Sil
+                </button>
+                <a href="/Admin/Product" class="btn btn-sm btn-outline-secondary">İptal</a>
+            </div>
+        </form>
+    </div>
+</div>

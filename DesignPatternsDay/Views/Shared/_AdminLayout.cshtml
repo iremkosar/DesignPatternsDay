@@ -1,0 +1,390 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/organic-html/assets/css/bootstrap.min.css">
+    <style>
+        :root {
+            --green: #7fad39;
+            --green-dark: #5a7d28;
+            --green-light: #eaf3de;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+        }
+
+        .sidebar {
+            width: 220px;
+            min-height: 100vh;
+            background: #1a2332;
+            border-right: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        .sidebar-logo {
+            padding: 16px;
+            border-bottom: 1px solid #2a3547;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        .logo-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .logo-sub {
+            font-size: 10px;
+            color: #8899aa;
+        }
+
+        .nav-section {
+            font-size: 10px;
+            font-weight: 600;
+            color: #4a6080;
+            padding: 16px 16px 4px;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 16px;
+            color: #8899aa;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all .15s;
+            margin: 1px 8px;
+            border-radius: 8px;
+        }
+
+            .nav-item a:hover {
+                background: #2a3547;
+                color: #fff;
+            }
+
+            .nav-item a.active {
+                background: var(--green);
+                color: #fff;
+                font-weight: 500;
+            }
+
+                .nav-item a.active i {
+                    color: #fff;
+                }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 16px;
+            border-top: 1px solid #2a3547;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .sidebar-user-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .sidebar-user-role {
+            font-size: 10px;
+            color: #8899aa;
+        }
+
+        .main-content {
+            margin-left: 220px;
+        }
+
+        .topbar {
+            background: #fff;
+            border-bottom: 1px solid #e9ecef;
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+        }
+
+        .topbar-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #8899aa;
+            flex: 1;
+        }
+
+            .topbar-breadcrumb span {
+                color: #1a2332;
+                font-weight: 500;
+            }
+
+        .topbar-icon-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: none;
+            background: #f0f2f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #6c757d;
+            position: relative;
+        }
+
+        .notif-dot {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #e24b4a;
+        }
+
+        .topbar-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #6c757d;
+            cursor: pointer;
+        }
+
+        .content-area {
+            padding: 24px;
+        }
+
+        .badge-orange {
+            background: #faeeda;
+            color: #854f0b;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .badge-blue {
+            background: #e6f1fb;
+            color: #185fa5;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .badge-purple {
+            background: #eeedfe;
+            color: #534ab7;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .badge-green {
+            background: var(--green-light);
+            color: var(--green-dark);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .badge-red {
+            background: #fcebeb;
+            color: #791f1f;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,.08);
+        }
+
+        .btn-green {
+            background: var(--green);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+            .btn-green:hover {
+                background: var(--green-dark);
+                color: #fff;
+            }
+
+        table {
+            font-size: 13px;
+        }
+
+        th {
+            font-size: 11px;
+            font-weight: 600;
+            color: #8899aa;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-circle"><i class="fas fa-leaf"></i></div>
+            <div>
+                <div style="font-size:13px;font-weight:600">Organic Admin</div>
+                <div style="font-size:10px;color:#adb5bd">Yönetim Paneli</div>
+            </div>
+        </div>
+        <nav style="padding: 8px 0;">
+            <div class="nav-section">Genel</div>
+            <div class="nav-item">
+                <a href="/Admin/Product" class="@(ViewContext.RouteData.Values["action"]?.ToString() == "Index" && ViewContext.RouteData.Values["controller"]?.ToString() == "Product" ? "active" : "")">
+                    <i class="fas fa-chart-line fa-fw"></i> Genel Bakış
+                </a>
+            </div>
+            <div class="nav-section">İçerik</div>
+            <div class="nav-item">
+                <a href="/Admin/Product">
+                    <i class="fas fa-box fa-fw"></i> Ürün Yönetimi
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="/Admin/Banner">
+                    <i class="fas fa-image fa-fw"></i> Banner
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="/Admin/Service">
+                    <i class="fas fa-concierge-bell fa-fw"></i> Servisler
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="/Admin/Trend">
+                    <i class="fas fa-fire fa-fw"></i> Trendler
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="/Admin/Blog">
+                    <i class="fas fa-blog fa-fw"></i> Blog Yazıları
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="/Admin/Review">
+                    <i class="fas fa-star fa-fw"></i> Müşteri Yorumları
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="/Admin/Order">
+                    <i class="fas fa-shopping-bag fa-fw"></i> Siparişler
+                </a>
+            </div>
+                    
+            <div class="nav-section">Sistem</div>
+            <div class="nav-item">
+                <a href="#">
+                    <i class="fas fa-cog fa-fw"></i> Ayarlar
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="/">
+                    <i class="fas fa-globe fa-fw"></i> Siteye Dön
+                </a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="sidebar-avatar">AY</div>
+            <div>
+                <div class="sidebar-user-name">Admin Yönetici</div>
+                <div class="sidebar-user-role">Süper Admin</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar">
+            <span style="font-size:14px;font-weight:500;flex:1">@ViewBag.Title</span>
+            <input type="search" placeholder="Ara..." class="form-control form-control-sm" style="max-width:200px" />
+            <button class="btn btn-sm btn-light"><i class="fas fa-bell"></i></button>
+            <button class="btn btn-sm btn-light"><i class="fas fa-envelope"></i></button>
+            <div style="width:32px;height:32px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--green-dark)">AD</div>
+        </div>
+        <div class="content-area">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="/organic-html/assets/js/jquery.min.js"></script>
+    <script src="/organic-html/assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

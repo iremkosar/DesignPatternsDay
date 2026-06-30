@@ -1,0 +1,47 @@
+﻿@model DesignPatternsDay.Entities.Banner
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Banner Düzenle";
+}
+
+<div class="card" style="max-width:600px">
+    <div class="card-body p-4">
+        <form method="post" action="/Admin/Banner/Edit/@Model.Id">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="mb-3">
+                <label class="form-label" style="font-size:13px">Başlık</label>
+                <input type="text" name="Title" value="@Model.Title" class="form-control form-control-sm" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" style="font-size:13px">Alt Başlık</label>
+                <input type="text" name="SubTitle" value="@Model.SubTitle" class="form-control form-control-sm" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" style="font-size:13px">Açıklama</label>
+                <textarea name="Description" class="form-control form-control-sm" rows="3">@Model.Description</textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" style="font-size:13px">Buton Yazısı</label>
+                <input type="text" name="ButtonText" value="@Model.ButtonText" class="form-control form-control-sm" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" style="font-size:13px">Fotoğraf URL</label>
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" style="height:60px;border-radius:4px;object-fit:cover;display:block;margin-bottom:8px;" />
+                }
+                <input type="text" name="ImageUrl" value="@Model.ImageUrl" class="form-control form-control-sm" />
+            </div>
+            <div class="mb-4">
+                <div class="form-check">
+                    <input type="checkbox" name="IsActive" value="true" class="form-check-input" id="isActive" @(Model.IsActive ? "checked" : "") />
+                    <label class="form-check-label" for="isActive" style="font-size:13px">Aktif</label>
+                </div>
+            </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn-green"><i class="fas fa-save"></i> Güncelle</button>
+                <a href="/Admin/Banner" class="btn btn-sm btn-outline-secondary">İptal</a>
+            </div>
+        </form>
+    </div>
+</div>

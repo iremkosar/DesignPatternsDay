@@ -1,0 +1,121 @@
+﻿<section class="cart_section sec_space_large" data-aos="fade-up" data-aos-duration="2000">
+    <div class="container">
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">@TempData["Success"]</div>
+        }
+
+        @if (!ViewBag.Cart.Count.Equals(0))
+        {
+            <div class="cart_table table-responsive position-relative">
+                <table class="table align-middle">
+                    <thead class="text-uppercase">
+                        <tr>
+                            <th>Fotoğraf</th>
+                            <th>Ürün Adı</th>
+                            <th>Birim Fiyat</th>
+                            <th>Adet</th>
+                            <th>Toplam</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.Cart)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="cart_product position-relative">
+                                        <div class="item_image">
+                                            <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "/organic-html/assets/images/cart/cart1.png" : item.ImageUrl)"
+                                                 style="width:60px;height:60px;object-fit:cover;border-radius:8px;" alt="@item.ProductName">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item_content">
+                                        <h4 class="item_title">@item.ProductName</h4>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="price_text">@item.Price.ToString("F2") ₺</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="/Cart/Decrease/@((int)item.ProductId)" class="btn btn-sm btn-outline-secondary">-</a>
+                                        <span>@item.Quantity</span>
+                                        <a href="/Cart/Increase/@((int)item.ProductId)" class="btn btn-sm btn-outline-secondary">+</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="total_price">@((item.Price * item.Quantity).ToString("F2")) ₺</span>
+                                </td>
+                                <td>
+                                    <a href="/Cart/Remove/@item.ProductId" class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- İndirim Seçimi — Strategy Pattern -->
+            <div class="coupon_wrap d-flex justify-content-between align-items-center mt-4">
+                <div class="d-flex gap-3">
+                    <a href="/Cart?discountType=standard"
+                       class="btn @(ViewBag.CurrentDiscount == "standard" ? "btn-success" : "btn-outline-success") rounded-pill">
+                        Standart (%5)
+                    </a>
+                    <a href="/Cart?discountType=bulk"
+                       class="btn @(ViewBag.CurrentDiscount == "bulk" ? "btn-success" : "btn-outline-success") rounded-pill">
+                        Toplu (%15)
+                    </a>
+                    <a href="/Cart?discountType=seasonal"
+                       class="btn @(ViewBag.CurrentDiscount == "seasonal" ? "btn-success" : "btn-outline-success") rounded-pill">
+                        Sezonluk (%10)
+                    </a>
+                </div>
+                <a href="/Cart/Clear" class="btn btn-outline-danger rounded-pill">
+                    <i class="fas fa-trash"></i> Sepeti Temizle
+                </a>
+            </div>
+
+            <!-- Toplam — Decorator Pattern -->
+            <div class="row justify-content-lg-end mt-4">
+                <div class="col col-lg-4">
+                    <div class="cart_pricing_table text-uppercase">
+                        <h3 class="table_title text-center">Sepet Toplamı</h3>
+                        <ul class="ul_li_block clearfix">
+                            <li>
+                                <span>Uygulanan İndirim</span>
+                                <span style="color:#7fad39">@ViewBag.StrategyDesc</span>
+                            </li>
+                            <li>
+                                <span>Ara Toplam (indirimli)</span>
+                                <span>@ViewBag.Subtotal.ToString("F2") ₺</span>
+                            </li>
+                            <li>
+                                <span>KDV (%18) dahil Toplam</span>
+                                <span style="font-weight:600">@ViewBag.Total.ToString("F2") ₺</span>
+                            </li>
+                        </ul>
+                        <div class="btn_wrap pt-0 text-center">
+                            <a href="/Checkout" class="btn text-uppercase text-white rounded-pill">Ödemeye Geç</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <i class="fas fa-shopping-bag fa-3x" style="color:#ccc"></i>
+                <h4 class="mt-3" style="color:#aaa">Sepetiniz boş</h4>
+                <a href="/Shop" class="btn btn-success rounded-pill mt-3">Alışverişe Başla</a>
+            </div>
+        }
+
+    </div>
+</section>

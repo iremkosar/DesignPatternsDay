@@ -1,0 +1,41 @@
+﻿@{
+    var reviews = ViewBag.Reviews as List<DesignPatternsDay.Entities.Review>;
+}
+
+<!-- testimonial-3 section start -->
+<section class="testimonial3_sec sec_space_large sec_top_100" data-aos="fade-up" data-aos-duration="2000">
+    <div class="testimonial3_sec_wrap">
+        <div class="container-sm">
+            <div class="testimonial3_content position-relative">
+                <div class="row">
+                    <div class="col-xs-12">
+                        @if (reviews != null && reviews.Any())
+                        {
+                            <div class="testimonial3_slider_thmb d-flex justify-content-center align-items-center">
+                                @foreach (var review in reviews)
+                                {
+                                    <div class="slide_item">
+                                        <img src="@(string.IsNullOrEmpty(review.ImageUrl) ? "/organic-html/assets/images/testimonials/test-1.jpg" : review.ImageUrl)"
+                                             alt="@review.CustomerName">
+                                    </div>
+                                }
+                            </div>
+                            <div class="testimonial3_slider_items col-lg-8 m-auto">
+                                @foreach (var review in reviews)
+                                {
+                                    <div class="testimonial3_text">
+                                        <p class="testimonial_desc text-center">@review.Comment</p>
+                                        <div class="testimonial_author text-center">
+                                            @review.CustomerName <font>- @review.Title</font>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- testimonial-3 section end -->

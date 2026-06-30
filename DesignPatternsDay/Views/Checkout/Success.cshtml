@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sipariş Alındı</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="/organic-html/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/organic-html/assets/css/style.css">
+</head>
+<body>
+    <div class="body-wrap overflow-hidden">
+        @await Html.PartialAsync("~/Views/Shared/Shop/_ShopHeaderComponentPartial.cshtml")
+
+        <main>
+            <section class="sec_space_large">
+                <div class="container text-center py-5">
+                    <i class="fas fa-check-circle fa-5x" style="color:#7fad39"></i>
+                    <h2 class="mt-4">Siparişiniz Alındı!</h2>
+                    <p class="text-muted mt-2">Siparişiniz başarıyla oluşturuldu. En kısa sürede size ulaşacağız.</p>
+                    <a href="/" class="btn custom_btn rounded-pill px-5 py-3 text-white mt-4">
+                        Ana Sayfaya Dön <i class="fas fa-long-arrow-alt-right"></i>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        @await Html.PartialAsync("~/Views/Shared/Shop/_ShopFooterComponentPartial.cshtml")
+        @await Html.PartialAsync("~/Views/Shared/Shop/_ShopScriptComponentPartial.cshtml")
+    </div>
+</body>
+</html>

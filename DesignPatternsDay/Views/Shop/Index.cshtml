@@ -1,0 +1,87 @@
+﻿@model List<DesignPatternsDay.Entities.Product>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop List Sidebar - /organic - Food E-commerce HTML Template</title>
+    <!-- favicon icon -->
+    <link rel="shortcut icon" href="/organic-html/assets/images/icons/favicon.ico" type="image/x-icon">
+
+    <!-- Include fontawesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Include google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Include bootstrap CSS -->
+    <link rel="stylesheet" href="/organic-html/assets/css/bootstrap.min.css">
+
+    <!-- Include aos CSS -->
+    <link rel="stylesheet" href="/organic-html/assets/css/aos.css">
+
+    <!-- Include magnific-popup CSS -->
+    <link rel="stylesheet" href="/organic-html/assets/css/magnific-popup.css">
+
+    <!-- Include nice-select CSS -->
+    <link rel="stylesheet" href="/organic-html/assets/css/nice-select.css">
+
+    <!-- Include slick CSS -->
+    <link rel="stylesheet" href="/organic-html/assets/css/jquery-ui.css">
+
+    <!-- Include slick-theme CSS -->
+    <link rel="stylesheet" href="/organic-html/assets/css/slick-theme.css">
+
+    <!-- Include slick CSS -->
+    <link rel="stylesheet" href="/organic-html/assets/css/slick.css">
+
+    <!-- Include stylesheet CSS -->
+    <link rel="stylesheet" href="/organic-html/assets/css/style.css">
+
+</head>
+
+<body>
+    <!-- body wrap start -->
+    <div class="body-wrap overflow-hidden">
+        <!-- back-to-top start -->
+        <div class="backtotop">
+            <a href="#!" class="scroll">
+                <i class="far fa-arrow-up fw-bold"></i>
+            </a>
+        </div>
+        <!-- back-to-top end -->
+        <!-- header section start -->
+        @await Html.PartialAsync("~/Views/Shared/Shop/_ShopHeaderComponentPartial.cshtml")
+
+        <!-- main body start -->
+        <main>
+        
+            @await Html.PartialAsync("~/Views/Shared/Shop/_ShopSidebarComponentPartial.cshtml")
+            @await Html.PartialAsync("~/Views/Shared/Shop/_ShopBreadcrumbComponentPartial.cshtml")
+            @await Html.PartialAsync("~/Views/Shared/Shop/_ShopListComponentPartial.cshtml", Model)
+          
+        </main>
+        <!-- main body end -->
+      
+        @await Html.PartialAsync("~/Views/Shared/Shop/_ShopFooterComponentPartial.cshtml")
+             
+        @await Html.PartialAsync("~/Views/Shared/Shop/_ShopRecentProductComponentPartial.cshtml")
+           
+        @await Html.PartialAsync("~/Views/Shared/Shop/_ShopQuickViewComponentPartial.cshtml")
+     
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Shop/_ShopScriptComponentPartial.cshtml")
+
+</body>
+
+</html>
