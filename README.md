@@ -55,7 +55,6 @@ Proje, klasik CRUD operasyonlarının ötesinde gerçek dünya senaryolarında 6
 ![Resim Açıklaması](https://github.com/iremkosar/DesignPatternsDay/blob/eb8eda49833b848410721da0c66b75197ea37b2f/DesignPatternsDay/wwwroot/7.png)
 ![Resim Açıklaması](https://github.com/iremkosar/DesignPatternsDay/blob/eb8eda49833b848410721da0c66b75197ea37b2f/DesignPatternsDay/wwwroot/8.png)
 ![Resim Açıklaması](https://github.com/iremkosar/DesignPatternsDay/blob/eb8eda49833b848410721da0c66b75197ea37b2f/DesignPatternsDay/wwwroot/9.png)
-![Resim Açıklaması](https://github.com/iremkosar/DesignPatternsDay/blob/eb8eda49833b848410721da0c66b75197ea37b2f/DesignPatternsDay/wwwroot/10.png)
 ![Resim Açıklaması](https://github.com/iremkosar/DesignPatternsDay/blob/eb8eda49833b848410721da0c66b75197ea37b2f/DesignPatternsDay/wwwroot/11.png)
 ![Resim Açıklaması](https://github.com/iremkosar/DesignPatternsDay/blob/eb8eda49833b848410721da0c66b75197ea37b2f/DesignPatternsDay/wwwroot/12.png)
 ![Resim Açıklaması](https://github.com/iremkosar/DesignPatternsDay/blob/eb8eda49833b848410721da0c66b75197ea37b2f/DesignPatternsDay/wwwroot/13.png)
